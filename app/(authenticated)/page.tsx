@@ -45,8 +45,10 @@ export default async function Page() {
                 )}
               </CardHeader>
               <CardFooter className="flex gap-2 justify-end">
-                <Button>
-                  <PlayIcon />
+                <Button asChild>
+                  <Link href={`/deck/${deck.id}/play`}>
+                    <PlayIcon />
+                  </Link>
                 </Button>
               </CardFooter>
             </Card>
