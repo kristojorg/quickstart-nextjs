@@ -1,5 +1,4 @@
-import { cookies } from "next/headers";
-import { notFound, redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
@@ -7,8 +6,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Header } from "@/components/header";
 import { PageContainer } from "@/components/page-container";
+import { NewCard } from "./new-card";
 
-import { updateDeck } from "./actions";
+import { updateDeck, addCard } from "./actions";
 import { getDeck } from "./queries";
 
 export default async function DeckPage({
@@ -17,12 +17,6 @@ export default async function DeckPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-
-  const cookieStore = await cookies();
-  const accessToken = cookieStore.get("flashcards_access_token")?.value;
-  if (!accessToken) {
-    redirect("/signup");
-  }
 
   const deck = await getDeck({ id });
 
@@ -64,6 +58,7 @@ export default async function DeckPage({
               </CardContent>
             </Card>
           ))}
+          <NewCard deckId={deck.id} onSubmit={addCard} />
         </div>
       </PageContainer>
     </>
