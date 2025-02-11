@@ -2,14 +2,23 @@
 
 import { readFile, writeFile } from "node:fs/promises";
 import { revalidatePath } from "next/cache";
-import { RawJSONDeck } from "./model";
+import { RawJSONDeck, Deck } from "@/lib/models";
 
 export async function importDeck(formData: FormData) {
   const file = formData.get("file") as File;
-  const deck = JSON.parse(await file.text()) as RawJSONDeck;
+  const rawDeck = JSON.parse(await file.text()) as RawJSONDeck;
+  const deck: Deck = {
+    ...rawDeck,
+    id: crypto.randomUUID(),
+    cards: rawDeck.cards.map((card) => ({
+      ...card,
+      id: crypto.randomUUID(),
+    })),
+  };
+
   const existingDecks = JSON.parse(
     await readFile("./decks.json", "utf-8")
-  ) as RawJSONDeck[];
+  ) as Deck[];
 
   await writeFile(
     "./decks.json",

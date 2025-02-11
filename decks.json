@@ -5,44 +5,55 @@
     "cards": [
       {
         "front": "What data structure is used as a container for all values in EdgeQL?",
-        "back": "Sets. Even single values are treated as sets with one element (singletons)."
+        "back": "Sets. Even single values are treated as sets with one element (singletons).",
+        "id": "d4ae4f90-d5e3-40b9-bb93-3ba87920b5a3"
       },
       {
         "front": "Can EdgeQL sets contain the same value multiple times?",
-        "back": "Yes, EdgeQL sets are mutli-sets."
+        "back": "Yes, EdgeQL sets are mutli-sets.",
+        "id": "1224802d-aff2-4430-bc57-27a5eeb3cb1f"
       },
       {
         "front": "How does EdgeQL represent no value?",
-        "back": "A typed empty set."
+        "back": "A typed empty set.",
+        "id": "c19a33c9-ce18-4a91-963d-0a70abf3ad93"
       },
       {
         "front": "What are the string scalar types in EdgeQL?",
-        "back": "str"
+        "back": "str",
+        "id": "c6765f7a-eba7-4211-b97e-aeec9e8f748e"
       },
       {
         "front": "What are the numeric scalar types in EdgeQL?",
-        "back": "int16, int32, int64, float32, float64, bigint, decimal"
+        "back": "int16, int32, int64, float32, float64, bigint, decimal",
+        "id": "9c2e2035-df4c-4493-ac91-814f2a562751"
       },
       {
         "front": "By default, are properties of an Object type required?",
-        "back": "No, unless marked as required, properties are optional."
+        "back": "No, unless marked as required, properties are optional.",
+        "id": "a1cbd29b-776c-49e3-946c-13f7c982f2fa"
       },
       {
         "front": "How do you define a one-to-one relationship between two object types?",
-        "back": "You define a single, exclusive link from one of the types to the other."
+        "back": "You define a single, exclusive link from one of the types to the other.",
+        "id": "a2513b91-7aa6-4a50-a265-fc73a1d65830"
       },
       {
         "front": "How do you define a one-to-many relationship between two object types?",
-        "back": "You define a multi, exclusive link from the one-typed object to the many-typed object."
+        "back": "You define a multi, exclusive link from the one-typed object to the many-typed object.",
+        "id": "29a2c3f9-9101-4776-b34b-2ef7a527ecd7"
       },
       {
         "front": "How do you define a many-to-one relationship between two object types?",
-        "back": "You define a single, non-exclusive link from the many-type to the one-type."
+        "back": "You define a single, non-exclusive link from the many-type to the one-type.",
+        "id": "b1eec9a2-a35e-475b-90e5-ef6a141a5516"
       },
       {
         "front": "How do you define a many-to-many relationship between two object types?",
-        "back": "You define a multi, non-exclusive link from one of the types to the other."
+        "back": "You define a multi, non-exclusive link from one of the types to the other.",
+        "id": "f6549287-8165-4d11-86a8-667ccedbb2e8"
       }
-    ]
+    ],
+    "id": "0930b208-ccd5-46d1-b012-5569ad3c8a4e"
   }
 ]

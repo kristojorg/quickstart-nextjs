@@ -1,17 +1,9 @@
 import { readFile } from "node:fs/promises";
 
-import { RawJSONDeck } from "./model";
+import { Deck } from "@/lib/models";
 
 export async function getDecks() {
-  const rawDecks = JSON.parse(await readFile("./decks.json", "utf-8")) as RawJSONDeck[];
-  const decks = rawDecks.map((rawDeck) => ({
-    ...rawDeck,
-    id: crypto.randomUUID(),
-    cards: rawDeck.cards.map((card) => ({
-      ...card,
-      id: crypto.randomUUID(),
-    })),
-  }));
+  const decks = JSON.parse(await readFile("./decks.json", "utf-8")) as Deck[];
 
   return decks;
 }
