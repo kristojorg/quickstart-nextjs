@@ -35,8 +35,6 @@ export async function addCard(formData: FormData) {
   const front = formData.get("front");
   const back = formData.get("back");
 
-  console.log({ formData, deckId, front, back });
-
   if (
     typeof deckId !== "string" ||
     typeof front !== "string" ||
@@ -55,4 +53,22 @@ export async function addCard(formData: FormData) {
   deck.cards.push({ front, back, id: crypto.randomUUID() });
   await writeFile("./decks.json", JSON.stringify(decks, null, 2));
   revalidatePath(`/deck/${deckId}`);
+}
+
+export async function deleteCard(formData: FormData) {
+  const cardId = formData.get("cardId");
+
+  if (typeof cardId !== "string") {
+    return;
+  }
+
+  const decks = JSON.parse(await readFile("./decks.json", "utf-8")) as Deck[];
+  const deck = decks.find((deck) => deck.cards.some((card) => card.id === cardId));
+  if (!deck) {
+    return;
+  }
+
+  deck.cards = deck.cards.filter((card) => card.id !== cardId);
+  await writeFile("./decks.json", JSON.stringify(decks, null, 2));
+  revalidatePath(`/`);
 }

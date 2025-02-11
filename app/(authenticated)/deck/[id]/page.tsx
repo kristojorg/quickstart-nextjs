@@ -2,13 +2,12 @@ import { notFound } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
 import { Header } from "@/components/header";
 import { PageContainer } from "@/components/page-container";
-import { NewCard } from "./new-card";
+import { EditCard } from "./edit-card";
+import { DeckCard } from "./deck-card";
 
-import { updateDeck, addCard } from "./actions";
+import { updateDeck, addCard, deleteCard } from "./actions";
 import { getDeck } from "./queries";
 
 export default async function DeckPage({
@@ -50,15 +49,18 @@ export default async function DeckPage({
 
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {deck.cards.map((card) => (
-            <Card key={card.id}>
-              <CardContent className="p-6 space-y-4">
-                <p>{card.front}</p>
-                <Separator />
-                <p className="text-sm text-muted-foreground">{card.back}</p>
-              </CardContent>
-            </Card>
+            <DeckCard
+              key={card.id}
+              card={card}
+              onDeleteRequested={async () => {
+                "use server";
+                const formData = new FormData();
+                formData.set("cardId", card.id);
+                await deleteCard(formData);
+              }}
+            />
           ))}
-          <NewCard deckId={deck.id} onSubmit={addCard} />
+          <EditCard deckId={deck.id} onSubmit={addCard} />
         </div>
       </PageContainer>
     </>
