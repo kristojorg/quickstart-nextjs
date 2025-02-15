@@ -16,7 +16,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <div className="[grid-template-areas:'header''body'] grid h-screen grid-rows-[auto_1fr] overflow-hidden">
+          {children}
+        </div>
+      </body>
     </html>
   );
 }
