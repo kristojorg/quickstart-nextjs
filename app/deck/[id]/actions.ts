@@ -9,11 +9,7 @@ export async function updateDeck(formData: FormData) {
   const name = formData.get("name");
   const description = formData.get("description");
 
-  if (
-    typeof id !== "string" ||
-    typeof name !== "string" ||
-    typeof description !== "string"
-  ) {
+  if (typeof id !== "string" || (name != null && description != null)) {
     return;
   }
 
@@ -24,8 +20,11 @@ export async function updateDeck(formData: FormData) {
     return;
   }
 
-  decks[index].name = name ?? decks[index].name;
-  decks[index].description = description ?? decks[index].description;
+  decks[index].name = typeof name === "string" ? name : decks[index].name;
+  decks[index].description =
+    typeof description === "string"
+      ? description || null
+      : decks[index].description;
 
   await writeFile("./decks.json", JSON.stringify(decks, null, 2));
 }
@@ -63,7 +62,9 @@ export async function deleteCard(formData: FormData) {
   }
 
   const decks = JSON.parse(await readFile("./decks.json", "utf-8")) as Deck[];
-  const deck = decks.find((deck) => deck.cards.some((card) => card.id === cardId));
+  const deck = decks.find((deck) =>
+    deck.cards.some((card) => card.id === cardId)
+  );
   if (!deck) {
     return;
   }
