@@ -11,7 +11,7 @@
     "autoprefixer": "^10.4.20",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "gel": "^2.0.0",
+    "gel": "^2.0.0-rc.1",
     "lucide-react": "^0.475.0",
     "next": "^15.1.0",
     "react": "^19.0.0",
@@ -21,7 +21,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.19.0",
-    "@gel/generate": "^0.6.0",
+    "@gel/generate": "^0.6.0-rc.1",
     "@tailwindcss/postcss": "^4.0.6",
     "@types/node": "^20",
     "@types/react": "^18",
