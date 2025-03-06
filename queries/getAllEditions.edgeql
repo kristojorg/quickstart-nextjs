@@ -1,4 +1,7 @@
 select EventEdition {
+  _tag,
   name,
-  day := .<edition[is EventDay],
+  name_capitalized,
+  day:= [is OneDayEventEdition].day ?? {},
+  days:=[is MultiDayEventEdition].days ?? {},
 }

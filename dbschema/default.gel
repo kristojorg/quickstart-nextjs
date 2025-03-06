@@ -8,18 +8,21 @@ module default {
   }
 
   abstract type EventEdition {
+    _tag:= .__type__.name;
     required name: str;
+    name_capitalized := str_upper(.name);
   }
 
   type OneDayEventEdition extending EventEdition {
-    # single day := assert_single(.<edition[is EventDay]);
+    day := .<edition[is EventDay];
   }
 
   type MultiDayEventEdition extending EventEdition {
-    # days := .<edition[is EventDay];
+    days := .<edition[is EventDay];
   }
 
   abstract type EventDay {
+    _tag:= .__type__.name;
     required date: datetime;
     required edition: EventEdition {
       on target delete delete source;
