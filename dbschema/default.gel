@@ -1,3 +1,36 @@
 module default {
 
+  type Event {
+    required multi editions: EventEdition {
+      on target delete allow;
+      on source delete delete target;
+    }
+  }
+
+  abstract type EventEdition {
+    required name: str;
+  }
+
+  type OneDayEventEdition extending EventEdition {
+    # single day := assert_single(.<edition[is EventDay]);
+  }
+
+  type MultiDayEventEdition extending EventEdition {
+    # days := .<edition[is EventDay];
+  }
+
+  abstract type EventDay {
+    required date: datetime;
+    required edition: EventEdition {
+      on target delete delete source;
+      on source delete delete target;
+    };
+  }
+
+  type OneDayEventDay extending EventDay {
+  }
+
+  type MultiDayEventDay extending EventDay{
+    required dayNumber: int16;
+  }
 }
